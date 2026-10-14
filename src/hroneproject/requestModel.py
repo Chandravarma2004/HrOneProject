@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Literal
 from datetime import datetime
+
 class AttendanceRequest(BaseModel):
     employee_id: str = Field(
         min_length=1,

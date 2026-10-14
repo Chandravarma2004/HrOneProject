@@ -5,6 +5,8 @@ from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from pymongo import AsyncMongoClient
+import certifi
+
 
 load_dotenv()
 
@@ -22,7 +24,12 @@ async def lifespan(app: FastAPI):
             "MONGODB_URI is missing from the .env file"
         )
 
-    client = AsyncMongoClient(MONGODB_URI)
+
+
+    client = AsyncMongoClient(
+    MONGODB_URI,
+    tlsCAFile=certifi.where(),
+    )
 
     try:
         # Check the MongoDB connection
